@@ -9,7 +9,7 @@ import storedata
 
 class mailHandler():
  
-  directory = storeData.readyToSendDirectory
+  directory = storedata.readyToSendDirectory
 
   def sendPendingMails(self):
     print("Sending pending emails")

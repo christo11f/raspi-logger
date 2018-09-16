@@ -4,7 +4,7 @@ from __future__ import print_function
 from apscheduler.schedulers.blocking import BlockingScheduler
 import sys
 import ds18b20
-import storeData
+import storedata
 import logging
 from mailhandler import mailHandler
 
@@ -21,13 +21,13 @@ class tempLoggerEmailer:
     self.scheduler = BlockingScheduler()
 
     job = self.scheduler.add_job(self.getData, 'cron', second=0)
-    job = self.scheduler.add_job(self.sendEmail, 'cron', hour='21', minute=49)
+    job = self.scheduler.add_job(self.sendEmail, 'cron', hour='22', minute=43)
 
   def getData(self):
     print('Get Data')
     temp = ds18b20.getTemperature()
     print(temp)
-    storeData.writeData(temp)
+    storedata.writeData(temp)
 
   def sendEmail(self):
     print('Send Email')

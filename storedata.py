@@ -27,13 +27,13 @@ def moveOldFiles(currentFileName):
       print("found current file")
       continue
     else:
-      print("found old file"+filename)
+      print("found old file "+filename)
       sourceFile = os.path.join(currentDirectory, filename)
       destinationFile = os.path.join(readyToSendDirectory, filename)
       shutil.move(sourceFile, destinationFile)
       continue
 
-def archiveReadyToSendFile(filename)
+def archiveReadyToSendFile(filename):
   sourceFile = os.path.join(readyToSendDirectory, filename)
   destinationFile = os.path.join(archiveDirectory, filename)
   shutil.move(sourceFile, destinationFile)  
