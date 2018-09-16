@@ -1,3 +1,5 @@
+# Remove the .template extension and fill in email addresses and smtp server password
+
 mailto = ''
 mailfrom = ''
 passw = ''
