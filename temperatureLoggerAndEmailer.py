@@ -6,12 +6,14 @@ import sys
 import ds18b20
 import storeData
 import logging
-import mail
+from mailhandler import mailHandler
+
 
 class tempLoggerEmailer:
 
   retryJob = None
   retryCounter = 0
+  mailer = mailHandler()
 
   def __init__(self):
     logging.basicConfig(filename='temperatureLoggerAndEmailer.log',level=logging.DEBUG)
@@ -19,7 +21,7 @@ class tempLoggerEmailer:
     self.scheduler = BlockingScheduler()
 
     job = self.scheduler.add_job(self.getData, 'cron', second=0)
-    job = self.scheduler.add_job(self.sendEmail, 'cron', hour='16', minute=24)
+    job = self.scheduler.add_job(self.sendEmail, 'cron', hour='21', minute=49)
 
   def getData(self):
     print('Get Data')
@@ -29,14 +31,14 @@ class tempLoggerEmailer:
 
   def sendEmail(self):
     print('Send Email')
-    sendSuccessful = mail.sendMail()
+    sendSuccessful = self.mailer.sendPendingMails()
     if sendSuccessful == False:
       print('Send mail failed')
       self.retryJob = self.scheduler.add_job(self.retrySendEmail, 'interval', minutes=3)
 
   def retrySendEmail(self):
     print('Resend Email')
-    sendSuccessful = mail.sendMail()
+    sendSuccessful = self.mailer.sendPendingMails()
     self.retryCounter = self.retryCounter + 1
     if sendSuccessful == True:
       self.retryJob.remove()

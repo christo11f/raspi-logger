@@ -11,10 +11,12 @@ from email.MIMEMultipart import MIMEMultipart
 from email.MIMEBase import MIMEBase
 from email import Encoders
 import unittest
+import os
 import private
 
 
-def sendMail(attachment):
+def sendMail(directory, attachment):
+  attachmentWithPath = os.path.join(directory, attachment)
   try:
     smtpserver = smtplib.SMTP('securesmtp.t-online.de', 587)
     smtpserver.ehlo()
@@ -31,7 +33,7 @@ def sendMail(attachment):
     msg['To'] = private.mailto
 
     part = MIMEBase('application', "octet-stream")
-    part.set_payload(open(attachment, "rb").read())
+    part.set_payload(open(attachmentWithPath, "rb").read())
     Encoders.encode_base64(part)
     part.add_header('Content-Disposition', 'attachement; filename="' + attachment + '"')
 

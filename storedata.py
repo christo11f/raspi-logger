@@ -19,6 +19,7 @@ def writeData(TempAsFloat):
     file.close() 
   except IOError:
     print("could not write file")
+  moveOldFiles(filename)
 
 def moveOldFiles(currentFileName):
   for filename in os.listdir(currentDirectory):
@@ -31,6 +32,11 @@ def moveOldFiles(currentFileName):
       destinationFile = os.path.join(readyToSendDirectory, filename)
       shutil.move(sourceFile, destinationFile)
       continue
+
+def archiveReadyToSendFile(filename)
+  sourceFile = os.path.join(readyToSendDirectory, filename)
+  destinationFile = os.path.join(archiveDirectory, filename)
+  shutil.move(sourceFile, destinationFile)  
 
 def initPaths():
   if not os.path.exists(currentDirectory):
