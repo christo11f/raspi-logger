@@ -16,12 +16,13 @@ class tempLoggerEmailer:
   mailer = mailHandler()
 
   def __init__(self):
+    storedata.initPaths()
     logging.basicConfig(filename='temperatureLoggerAndEmailer.log',level=logging.DEBUG)
     logging.info('Main')
     self.scheduler = BlockingScheduler()
 
     job = self.scheduler.add_job(self.getData, 'cron', second=0)
-    job = self.scheduler.add_job(self.sendEmail, 'cron', hour='22', minute=43)
+    job = self.scheduler.add_job(self.sendEmail, 'cron', hour='00', minute=10)
 
   def getData(self):
     print('Get Data')
