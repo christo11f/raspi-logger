@@ -7,7 +7,7 @@ import ds18b20
 import storedata
 import logging
 from mailhandler import mailHandler
-
+import os
 
 class tempLoggerEmailer:
 
@@ -52,6 +52,10 @@ class tempLoggerEmailer:
 
 
 def main():
+  print("Working dir: " + os.getcwd())
+  filedir = os.path.dirname(os.path.abspath(__file__))
+  os.chdir(filedir)
+  print("New working dir: " + os.getcwd())
   tempLE = tempLoggerEmailer()
   tempLE.run()
 
