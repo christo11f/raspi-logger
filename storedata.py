@@ -15,7 +15,7 @@ def writeData(TempAsFloat):
   try:
     file = open(filenameWithPath,"a")
     file.write(time.strftime("%d.%m.%Y, %H:%M:%S"))
-    file.write(", %.1f\n" % TempAsFloat)
+    file.write(", %.1f \n" % TempAsFloat)
     file.close() 
   except IOError:
     print("could not write file")

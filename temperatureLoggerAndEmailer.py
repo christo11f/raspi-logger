@@ -21,7 +21,7 @@ class tempLoggerEmailer:
     logging.info('Main')
     self.scheduler = BlockingScheduler()
 
-    job = self.scheduler.add_job(self.getData, 'cron', second=0)
+    job = self.scheduler.add_job(self.getData, 'cron', minute='0,10,20,30,40,50')
     job = self.scheduler.add_job(self.sendEmail, 'cron', hour='00', minute=10)
 
   def getData(self):
@@ -48,6 +48,8 @@ class tempLoggerEmailer:
       self.retryJob.remove()
 
   def run(self):
+    print('Run the logger and mailer')
+    self.sendEmail()
     self.scheduler.start()
 
 

@@ -28,7 +28,7 @@ def sendMail(directory, attachment):
     date = datetime.date.today()
 
     msg = MIMEMultipart()
-    msg['Subject'] = 'Datenerfassung Strinz ' + attachment
+    msg['Subject'] = 'Datenerfassung ' + attachment
     msg['From'] = private.mailfrom
     msg['To'] = private.mailto
 
@@ -39,7 +39,7 @@ def sendMail(directory, attachment):
 
     msg.attach(part)
 
-    smtpserver.sendmail(private.mailfrom, [private.mailto], msg.as_string())
+    smtpserver.sendmail(msg['From'], msg['To'].split(','), msg.as_string())
     smtpserver.quit()
     return True
 
